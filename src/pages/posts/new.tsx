@@ -20,7 +20,7 @@ function CreatePostPage() {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       {error && error.message}
-      <h1>Create posts</h1>
+      <h1>Add post</h1>
       <input type="text" {...register('title')} />
       <br />
       <textarea placeholder="Your post" {...register('body')} />
