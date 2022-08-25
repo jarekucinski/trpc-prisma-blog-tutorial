@@ -7,7 +7,7 @@ export const postRouter = createRouter()
     input: createPostSchema,
     async resolve({ ctx, input }) {
       if (!ctx.user) {
-        return new trpc.TRPCError({ code: 'UNAUTHORIZED', message: 'Can not create a post while logged out' })
+        throw new trpc.TRPCError({ code: 'UNAUTHORIZED', message: 'Can not create a post while logged out' })
       }
 
       const post = await ctx.prisma.post.create({
