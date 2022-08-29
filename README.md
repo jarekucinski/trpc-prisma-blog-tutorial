@@ -1,4 +1,4 @@
-# trpc-prisma-blog-tutorial
+# trpc-prisma-nextjs-learning
 
 tRPC with Next.js, TypeScript &amp; Prisma
 
@@ -6,7 +6,14 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-First, run the development server:
+First, start the docker container with database:
+
+```bash
+cd docker/postgres
+docker compose up
+```
+
+next run the development server:
 
 ```bash
 npm run dev
