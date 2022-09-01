@@ -31,6 +31,7 @@ model LoginToken {
 
 model Post {
   id        String    @unique @default(uuid())
+  permalink String    @unique
   title     String
   body      String
   createdAt DateTime  @default(now())
