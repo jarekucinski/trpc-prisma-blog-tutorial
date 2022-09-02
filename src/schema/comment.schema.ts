@@ -5,3 +5,11 @@ export const getAllCommentsSchema = z.object({
 })
 
 export type GetAllCommentsInput = z.TypeOf<typeof getAllCommentsSchema>
+
+export const addCommentSchema = z.object({
+  body: z.string(),
+  permalink: z.string(),
+  parentId: z.string().optional(),
+})
+
+export type AddCommentInput = z.TypeOf<typeof addCommentSchema>
