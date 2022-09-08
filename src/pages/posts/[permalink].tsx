@@ -8,7 +8,7 @@ function SinglePostPage() {
 
   const permalink = router.query.permalink as string
 
-  const { data, isLoading } = trpc.useQuery(['posts.get-post-by-permalink', { permalink }])
+  const { data, isLoading } = trpc.useQuery(['posts.get-by-permalink', { permalink }])
 
   if (isLoading) {
     return <p>Loading post...</p>
@@ -21,7 +21,7 @@ function SinglePostPage() {
   return (
     <div>
       <h1>{data.title}</h1>
-      <p>{data.body}</p>
+      <div dangerouslySetInnerHTML={{ __html: data?.body || '' }} />
     </div>
   )
 }
