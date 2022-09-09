@@ -2,6 +2,14 @@ import { createPostSchema, getPostByPermalinkSchema, getSinglePostSchema } from 
 import * as trpc from '@trpc/server'
 import { createRouter } from '../createRouter'
 
+const getPermaLink = (title: string) =>
+  title
+    .toLowerCase()
+    .trim()
+    .replace(/[^\w\s-]/g, '')
+    .replace(/[\s_-]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+
 export const postRouter = createRouter()
   .mutation('create-post', {
     input: createPostSchema,
@@ -9,6 +17,10 @@ export const postRouter = createRouter()
       if (!ctx.user) {
         throw new trpc.TRPCError({ code: 'UNAUTHORIZED', message: 'Can not create a post while logged out' })
       }
+
+      const { title } = input
+
+      const permalink = `${getPermaLink(title)}`
 
       const post = await ctx.prisma.post.create({
         data: {
@@ -18,6 +30,7 @@ export const postRouter = createRouter()
               id: ctx.user.id,
             },
           },
+          permalink,
         },
       })
 
